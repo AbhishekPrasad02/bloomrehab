@@ -285,29 +285,19 @@
             line-height: 1.6;
         }
 
-        .showcase-image {
-        position: relative;
-        padding-top: 75%;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        transform: perspective(1000px) rotateY(-15deg);
-        transition: 0.5s;
-    }
+     
+        .showcase-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-    .showcase-image:hover {
-        transform: perspective(1000px) rotateY(-5deg);
-    }
-    
-    .showcase-image img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 20px;
-    }
+        .showcase-image:hover {
+            transform: perspective(1000px) rotateY(-5deg);
+        }
 
         .stats {
             padding: 4rem 2rem;
@@ -568,33 +558,54 @@
     </section>
 
     <section class="product-showcase" id="product">
-    <div class="showcase-grid">
-        <div class="showcase-content" data-aos="fade-right">
-            <h2>Revolutionary Technology</h2>
-            <p>Our patented rehabilitation device combines cutting-edge robotics with intuitive design to provide comprehensive therapy for stroke patients.</p>
-            <div class="showcase-features">
-                <!-- Feature items remain the same -->
-                <div class="showcase-feature-item">
-                    <div class="icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                        </svg>
+        <div class="showcase-grid">
+            <div class="showcase-content" data-aos="fade-right">
+                <h2>Revolutionary Technology</h2>
+                <p>Our patented rehabilitation device combines cutting-edge robotics with intuitive design to provide comprehensive therapy for stroke patients.</p>
+                <div class="showcase-features">
+                    <div class="showcase-feature-item">
+                        <div class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h4>Smart Motion Analysis</h4>
+                            <p>Real-time monitoring and analysis of patient movements with AI-powered precision tracking.</p>
+                        </div>
                     </div>
-                    <div class="content">
-                        <h4>Smart Motion Analysis</h4>
-                        <p>Real-time monitoring and analysis of patient movements with AI-powered precision tracking.</p>
+                    <div class="showcase-feature-item">
+                        <div class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 16v-4M12 8h.01"/>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h4>Compact Design</h4>
+                            <p>Space-efficient solution that combines multiple therapy functions in one sleek device.</p>
+                        </div>
+                    </div>
+                    <div class="showcase-feature-item">
+                        <div class="icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M20 7h-9M20 11h-9M20 15h-9M3 7h2M3 11h2M3 15h2"/>
+                            </svg>
+                        </div>
+                        <div class="content">
+                            <h4>Clinically Validated</h4>
+                            <p>Proven results backed by extensive clinical research and real-world implementation.</p>
+                        </div>
                     </div>
                 </div>
-                <!-- Other feature items -->
+                <a href="#contact" class="btn">Learn More</a>
             </div>
-            <a href="#contact" class="btn">Learn More</a>
+           <div class="showcase-image" data-aos="fade-left">
+    <img src="device.png" alt="Bloomrehab Device" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+</div>
         </div>
-        <div class="showcase-image" data-aos="fade-left">
-            <!-- Using a placeholder image since "device.png" might not be available -->
-            <img src="device.png" alt="Bloomrehab Device" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; border-radius: 20px;">
-        </div>
-    </div>
-</section>
+    </section>
+
 
     <section class="contact" id="contact">
         <div class="contact-content" data-aos="fade-up">
