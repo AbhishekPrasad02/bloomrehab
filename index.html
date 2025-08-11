@@ -581,6 +581,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+           
         }
 
         .testimonial-header {
@@ -1430,6 +1431,7 @@
             <div class="testimonial-header" id="testimonial-header">
                 <h2 class="testimonial-title">Therapist Thoughts</h2>
                 <p class="testimonial-subtitle">Discover what the therapist have to say about our robot</p>
+                
             </div>
 
             <div class="testimonials-grid">
@@ -1606,52 +1608,51 @@ Karnataka, 560041</p>
         });
 
         // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Close mobile menu when link is clicked
-                navMenu.classList.remove('active');
-                mobileToggle.classList.remove('active');
-                
-                // Get the target section
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    // Calculate the offset for the fixed navbar
-                    const navbarHeight = navbar.offsetHeight + 20; // 20px for top margin
-                    const targetPosition = targetSection.offsetTop - navbarHeight;
-                    
-                    // Smooth scroll to target
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    
+    // Handle all anchor links with a single event listener
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        
+        e.preventDefault();
+        
+        // Close mobile menu when link is clicked
+        const navMenu = document.getElementById('nav-menu');
+        const mobileToggle = document.getElementById('mobile-toggle');
+        if (navMenu && mobileToggle) {
+            navMenu.classList.remove('active');
+            mobileToggle.classList.remove('active');
+        }
+        
+        // Get the target section
+        const targetId = link.getAttribute('href');
+        
+        // Handle home link specifically
+        if (targetId === '#home') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-        });
-
-        // Update CTA and About buttons to use smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    const navbarHeight = navbar.offsetHeight + 20;
-                    const targetPosition = targetSection.offsetTop - navbarHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+            return;
+        }
+        
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            // Calculate the offset for the fixed navbar
+            const navbarHeight = navbar ? navbar.offsetHeight + 20 : 100; // 20px for top margin
+            const targetPosition = targetSection.offsetTop - navbarHeight;
+            
+            // Smooth scroll to target
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
             });
-        });
-
+        }
+    });
+});
         // CTA button click effect
         const ctaBtn = document.getElementById('cta-btn');
         ctaBtn.addEventListener('click', function(e) {
