@@ -35,6 +35,73 @@
             border-radius: 1.4rem;
             transition: all 0.3s ease;
         }
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .success-text {
+            color: #718096;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .form-container {
+            display: block;
+        }
+
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
 
         .navbar.scrolled {
             background: rgba(255, 255, 255, 0.98);
@@ -1191,6 +1258,227 @@
     transition: all 1s cubic-bezier(0.4, 0.6, 0.23, 1) 0.3s;
 }
 
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 1rem;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #7f8c8d;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-button:hover {
+    background: #ecf0f1;
+    color: #e74c3c;
+    transform: rotate(90deg);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* 1. Style the profession select dropdown */
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background-color: white;
+    cursor: pointer;
+    appearance: none; /* Remove default browser styling */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 45px;
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+#customProfession {
+    display: none;
+    margin-top: 0.5rem;
+}
+
+/* 2. Hide error message by default */
+.error-message {
+    display: none !important;
+    background: #fee;
+    border: 1px solid #fcc;
+    color: #c33;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-message.show {
+    display: block !important;
+}
+
+/* 3. Hide modal header when showing success message */
+.modal.success-mode .modal-header {
+    display: none;
+}
+
+/* 4. Better mobile responsiveness */
+@media (max-width: 768px) {
+    .modal {
+        width: 95%;
+        max-width: none;
+        margin: 1rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        width: 90%;
+        max-width: 400px;
+        max-height: 85vh;
+        border-radius: 15px;
+        margin: 1rem;
+        overflow-y: auto;
+    }
+}
+.submit-button {
+    width: 100%;
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+    background: linear-gradient(45deg, #2980b9, #21618c);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Blur effect for background when modal is open */
+body.modal-open .hero,
+body.modal-open .introduction,
+body.modal-open .showcase-section,
+body.modal-open .testimonial-section,
+body.modal-open .supported-section,
+body.modal-open .footer {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+
 .logos-container.animate {
     opacity: 1;
     transform: translateY(0);
@@ -1304,6 +1592,7 @@
     }
 }
     </style>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1338,11 +1627,79 @@
                 <p class="hero-description">
                     The world's first all-in-one rehabilitation robot that transforms arm, leg, and gait therapy into a seamless, personalized recovery experience. Where innovation meets healing.
                 </p>
-                <a href="#contact" class="cta-button" id="cta-btn">Contact</a>
+                <button class="cta-button" id="cta-btn">Contact</button>
             </div>
         </div>
     </section>
-
+<!-- Contact Modal -->
+<div class="modal-overlay" id="contactModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Get In Touch</h2>
+                <button class="close-button" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="form-container" id="formContainer">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="from_name" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="from_email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Contact Number</label>
+                            <input type="tel" id="phone" name="phone_number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profession">Profession *</label>
+                            <select id="profession" name="profession" required>
+                                <option value="">Select your profession</option>
+                                <option value="Physiotherapist">Physiotherapist</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Owner">Owner</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <input type="text" id="customProfession" name="profession" placeholder="Please specify your profession">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" placeholder="City, State/Country">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your needs..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button" id="submitBtn">
+                        <span id="buttonText">Send Message</span>
+                        <span id="loadingSpinner" style="display: none;">Sending...</span>
+                    </button>
+                </form>
+                
+                <div class="error-message" id="errorMessage">
+                    Sorry, there was an error sending your message. Please try again or contact us directly.
+                </div>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✓</div>
+                <h3 class="success-title">Thank You!</h3>
+                <p class="success-text">We've received your message and will get back to you within 24 hours. We appreciate your interest and look forward to connecting with you soon.</p>
+            </div>
+        </div>
+    </div>
    <!-- Introduction Section -->
     <section class="introduction" id="about">
         <h2>
@@ -1386,8 +1743,8 @@
                     <div class="video-wrapper active" data-video="0">
                        <img src="Compound.png" alt="Description" loading="lazy">
                         <div class="showcase-video-overlay">
-                            <div class="patient-name">Krishnamurthy</div>
-                            <div class="patient-details">PCA Stroke</div>
+                            <div class="patient-name">Ram</div>
+                            <div class="patient-details">Age 45 • Post-stroke compound movement therapy</div>
                         </div>
                     </div>
 
@@ -1395,8 +1752,8 @@
                     <div class="video-wrapper" data-video="1">
                        <img src="bedsideleg.jpg" alt="Description" loading="lazy">
                         <div class="showcase-video-overlay">
-                            <div class="patient-name">Rajeshekar</div>
-                            <div class="patient-details">Traumatic Brain injury</div>
+                            <div class="patient-name">Lakhan</div>
+                            <div class="patient-details">Age 62 • Bedside lower limb rehabilitation</div>
                         </div>
                     </div>
 
@@ -1404,8 +1761,8 @@
                     <div class="video-wrapper" data-video="2">
                         <img src="legraise.jpg" alt="Description" loading="lazy">
                         <div class="showcase-video-overlay">
-                            <div class="patient-name">Sree Krishna</div>
-                            <div class="patient-details">Spinal Cord Injury</div>
+                            <div class="patient-name">Kishan</div>
+                            <div class="patient-details">Age 38 • Upper extremity bedside therapy</div>
                         </div>
                     </div>
                 </div>
@@ -1442,7 +1799,7 @@
                     </div>
                     <div class="testimonial-content">
                         <p class="testimonial-text">
-                            This can be used in both neurological and orthopedic conditions. Compared to existing rehabilitation devices it can do complex movements required for providing comprehensive physiotherapy.
+                            Working with Asteria has been transformative for our manufacturing processes. Their innovative solutions and attention to detail exceeded all our expectations.
                         </p>
                         <div class="client-info">
                             <div class="client-details">
@@ -1460,11 +1817,11 @@
                     </div>
                     <div class="testimonial-content">
                         <p class="testimonial-text">
-                            The device can provide bedside rehabilitation, which makes it very convenient for patient and us as we dont have to now go through risky patient shifting from bed to rehab device.
+                            The professionalism and expertise demonstrated throughout our project was remarkable. They delivered solutions that completely optimized our workflow.
                         </p>
                         <div class="client-info">
                             <div class="client-details">
-                                <h3>Sre Ridanya</h3>
+                                <h3>Shree</h3>
                                 <p>Lead Occupational Therapist</p>
                             </div>
                         </div>
@@ -1587,9 +1944,173 @@ Karnataka, 560041</p>
     </footer>
 
     <script>
+        
         // Mobile menu toggle
         const mobileToggle = document.getElementById('mobile-toggle');
         const navMenu = document.getElementById('nav-menu');
+        // Modal functionality
+ const EMAILJS_CONFIG = {
+            publicKey: 'QX_dAgYehwCmVqTRM',    // Replace with your EmailJS public key
+            serviceId: 'service_4gpfb84',    // Replace with your EmailJS service ID
+            templateId: 'template_x79pezj'   // Replace with your EmailJS template ID
+        };
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+
+        // Modal functionality
+        const modal = document.getElementById('contactModal');
+        const openModalBtn = document.getElementById('cta-btn');
+        const closeModalBtn = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+        const professionSelect = document.getElementById('profession');
+        const customProfessionInput = document.getElementById('customProfession');
+        const formContainer = document.getElementById('formContainer');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const buttonText = document.getElementById('buttonText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+openModalBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    // Reset everything before opening
+    contactForm.reset();
+    customProfessionInput.style.display = 'none';
+    customProfessionInput.required = false;
+    formContainer.style.display = 'block';
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+    errorMessage.classList.remove('show');
+    modal.classList.remove('success-mode');
+    submitBtn.disabled = false;
+    buttonText.textContent = 'Send Message';
+    loadingSpinner.style.display = 'none';
+    buttonText.style.display = 'inline';
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => {
+        document.getElementById('name').focus();
+    }, 200);
+});
+
+        // Close modal
+        const closeModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                contactForm.reset();
+                customProfessionInput.style.display = 'none';
+                formContainer.style.display = 'block';
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                submitBtn.disabled = false;
+                buttonText.textContent = 'Send Message';
+                loadingSpinner.style.display = 'none';
+                buttonText.style.display = 'inline';
+            }, 300);
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    submitBtn.disabled = true;
+    buttonText.style.display = 'none';
+    loadingSpinner.style.display = 'inline';
+    errorMessage.style.display = 'none';
+    errorMessage.classList.remove('show');
+    
+    emailjs.sendForm(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, this)
+        .then(function() {
+            formContainer.style.display = 'none';
+            successMessage.style.display = 'block';
+            modal.classList.add('success-mode'); // This hides the header
+            
+            setTimeout(() => {
+                closeModal();
+            }, 4000);
+            
+        }, function(error) {
+            errorMessage.style.display = 'block';
+            errorMessage.classList.add('show');
+        })
+        .finally(function() {
+            submitBtn.disabled = false;
+            loadingSpinner.style.display = 'none';
+            buttonText.style.display = 'inline';
+        });
+});
+        // Add floating animation to form elements
+        document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentNode.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentNode.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add smooth scrolling for mobile if modal content overflows
+        const modalElement = document.querySelector('.modal');
+        let isScrolling = false;
+
+        modalElement.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                modalElement.style.scrollBehavior = 'smooth';
+                isScrolling = true;
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 100);
+            }
+        });
+
+        // Enhanced form validation feedback
+        const inputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = '#ef4444';
+                } else {
+                    this.style.borderColor = '#10b981';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.value.trim() !== '') {
+                    this.style.borderColor = '#e2e8f0';
+                }
+            });
+        });
+professionSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'Other') {
+                customProfessionInput.style.display = 'block';
+                customProfessionInput.required = true;
+                customProfessionInput.focus();
+            } else {
+                customProfessionInput.style.display = 'none';
+                customProfessionInput.required = false;
+                customProfessionInput.value = '';
+            }
+        });
+
 
         mobileToggle.addEventListener('click', function() {
             this.classList.toggle('active');
@@ -1889,5 +2410,3 @@ supportedElements.forEach(el => {
     </script>
 </body>
 </html>
-
-
