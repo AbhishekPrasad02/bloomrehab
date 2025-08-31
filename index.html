@@ -1617,20 +1617,20 @@ body.modal-open .footer {
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-       <video class="hero-video" autoplay muted loop>
-    <source src="reversal.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Redefining Rehabilitation</h1>
-                <p class="hero-description">
-                    The world's first all-in-one rehabilitation robot that transforms arm, leg, and gait therapy into a seamless, personalized recovery experience. Where innovation meets healing.
-                </p>
-                <button class="cta-button" id="cta-btn">Contact Us</button>
-            </div>
+    <video class="hero-video" autoplay muted id="hero-video">
+        <source src="reversal.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1>Redefining Rehabilitation</h1>
+            <p class="hero-description">
+                The world's first all-in-one rehabilitation robot that transforms arm, leg, and gait therapy into a seamless, personalized recovery experience. Where innovation meets healing.
+            </p>
+            <button class="cta-button" id="cta-btn">Contact Us</button>
         </div>
-    </section>
+    </div>
+</section>
 <!-- Contact Modal -->
 <div class="modal-overlay" id="contactModal">
         <div class="modal">
@@ -1944,6 +1944,68 @@ Karnataka, 560041</p>
     </footer>
 
     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const heroVideo = document.getElementById('hero-video');
+    
+    if (heroVideo) {
+        let isPlayingForward = true;
+        let startTime = 2; // Start from 2nd second
+        let endTime = 0; // Will be set when video metadata loads
+        
+        // Remove the loop attribute since we're handling looping manually
+        heroVideo.removeAttribute('loop');
+        
+        // Initialize video settings
+        heroVideo.addEventListener('loadedmetadata', function() {
+            endTime = this.duration; // Get total video duration
+            this.currentTime = startTime; // Start from 2nd second
+            this.playbackRate = 1; // Normal speed
+        });
+        
+        // Handle the ping-pong effect
+        heroVideo.addEventListener('timeupdate', function() {
+            if (isPlayingForward) {
+                // Playing forward: check if we've reached the end
+                if (this.currentTime >= endTime - 0.1) { // Small buffer to avoid timing issues
+                    isPlayingForward = false;
+                    this.playbackRate = -1; // Play in reverse
+                }
+            } else {
+                // Playing backward: check if we've reached the start point
+                if (this.currentTime <= startTime + 0.1) { // Small buffer
+                    isPlayingForward = true;
+                    this.playbackRate = 1; // Play forward again
+                }
+            }
+        });
+        
+        // Handle when video ends (fallback)
+        heroVideo.addEventListener('ended', function() {
+            if (isPlayingForward) {
+                // If we somehow reach the end while playing forward, switch to reverse
+                isPlayingForward = false;
+                this.playbackRate = -1;
+                this.play();
+            } else {
+                // If we reach the beginning while playing backward, switch to forward
+                isPlayingForward = true;
+                this.currentTime = startTime;
+                this.playbackRate = 1;
+                this.play();
+            }
+        });
+        
+        // Ensure video keeps playing
+        heroVideo.addEventListener('pause', function() {
+            // Auto-resume if paused (unless user intentionally paused)
+            if (document.visibilityState === 'visible') {
+                setTimeout(() => {
+                    this.play();
+                }, 100);
+            }
+        });
+    }
+});
         
         // Mobile menu toggle
         const mobileToggle = document.getElementById('mobile-toggle');
@@ -2410,4 +2472,3 @@ supportedElements.forEach(el => {
     </script>
 </body>
 </html>
-
